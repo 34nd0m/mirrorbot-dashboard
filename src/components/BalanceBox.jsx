@@ -17,9 +17,9 @@ export default function BalanceBox({ rpcUrl, targetWallet, watchMode = "ETH", to
 
     async function fetchBalance() {
       try {
-        let bal, displayBalance, sym;
+        let displayBalance, sym;
         if (watchMode === "ETH") {
-          bal = await provider.getBalance(targetWallet);
+          const bal = await provider.getBalance(targetWallet);
           displayBalance = ethers.formatEther(bal);
           sym = "ETH";
         } else {
