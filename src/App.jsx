@@ -1,38 +1,62 @@
-import React, { useState } from 'react';
-
+import { useState } from 'react';
 import BalanceBox from './components/BalanceBox';
 
-// Inside your main App component's return:
-<BalanceBox />
-
 export default function App() {
-  const [buyEnabled, setBuyEnabled] = useState(true);
-  const [sellEnabled, setSellEnabled] = useState(true);
-  const [mode, setMode] = useState("TOKEN");
+  const [rpcUrl] = useState("https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID"); // still fixed
+  const [watchMode, setWatchMode] = useState("ETH");
+  const [targetWallet, setTargetWallet] = useState("");
+  const [tokenAddress, setTokenAddress] = useState("");
 
   return (
     <div className="p-8 font-sans">
       <h1 className="text-2xl font-bold mb-4">MirrorBot Dashboard</h1>
 
-      <div className="space-y-4">
+      <div className="space-y-4 mb-6">
         <div>
           <label className="block font-semibold">Watch Mode:</label>
-          <select value={mode} onChange={(e) => setMode(e.target.value)} className="border rounded px-2 py-1">
+          <select
+            className="border px-2 py-1 rounded"
+            value={watchMode}
+            onChange={(e) => setWatchMode(e.target.value)}
+          >
             <option value="ETH">ETH</option>
             <option value="TOKEN">TOKEN</option>
           </select>
         </div>
 
         <div>
-          <label className="block font-semibold">Buy Mirroring:</label>
-          <input type="checkbox" checked={buyEnabled} onChange={() => setBuyEnabled(!buyEnabled)} />
+          <label className="block font-semibold">Target Wallet:</label>
+          <input
+            type="text"
+            className="border px-2 py-1 rounded w-full"
+            placeholder="0x..."
+            value={targetWallet}
+            onChange={(e) => setTargetWallet(e.target.value)}
+          />
         </div>
 
-        <div>
-          <label className="block font-semibold">Sell Mirroring:</label>
-          <input type="checkbox" checked={sellEnabled} onChange={() => setSellEnabled(!sellEnabled)} />
-        </div>
+        {watchMode === "TOKEN" && (
+          <div>
+            <label className="block font-semibold">Token Address:</label>
+            <input
+              type="text"
+              className="border px-2 py-1 rounded w-full"
+              placeholder="0x..."
+              value={tokenAddress}
+              onChange={(e) => setTokenAddress(e.target.value)}
+            />
+          </div>
+        )}
       </div>
+
+      {targetWallet && (watchMode === "ETH" || (watchMode === "TOKEN" && tokenAddress)) && (
+        <BalanceBox
+          rpcUrl={rpcUrl}
+          targetWallet={targetWallet}
+          watchMode={watchMode}
+          tokenAddress={tokenAddress}
+        />
+      )}
     </div>
   );
 }
