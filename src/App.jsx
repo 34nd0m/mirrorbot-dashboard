@@ -2,10 +2,10 @@ import { useState } from 'react';
 import BalanceBox from './components/BalanceBox';
 
 export default function App() {
-  const [rpcUrl] = useState("https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID"); // still fixed
+  const [rpcUrl] = useState("https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID");
   const [watchMode, setWatchMode] = useState("ETH");
-  const [targetWallet, setTargetWallet] = useState("");
-  const [tokenAddress, setTokenAddress] = useState("");
+  const [targetWallet, setTargetWallet] = useState("0x0000000000000000000000000000000000000000");
+  const [tokenAddress, setTokenAddress] = useState("0x0000000000000000000000000000000000000000");
 
   return (
     <div className="p-8 font-sans">
