@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+import BalanceBox from './components/BalanceBox';
+
+// Inside your main App component's return:
+<BalanceBox />
+
 export default function App() {
   const [buyEnabled, setBuyEnabled] = useState(true);
   const [sellEnabled, setSellEnabled] = useState(true);
