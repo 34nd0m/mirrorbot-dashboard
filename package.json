@@ -1,6 +1,6 @@
 {
   "name": "mirrorbot-dashboard",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,7 +9,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ethers": "^6.13.0"
+    "ethers": "^6.13.0",
+    "axios": "^1.6.8"
   },
   "devDependencies": {
     "vite": "^4.0.0",
